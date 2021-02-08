@@ -1,6 +1,6 @@
 [submodule "polybar-musicjs"]
-	path = ./polybar/.config/polybar/themes/gruvbox-material/scripts/polybar-musicjs
+	path = polybar/.config/polybar/themes/gruvbox-material/scripts/polybar-musicjs
 	url = https://github.com/lyonelz96/polybar-musicjs 
 [submodule "devicons2"]
-	path = ./ranger/.config/ranger/plugins/devicons2
+	path = ranger/.config/ranger/plugins/devicons2
 	url = https://github.com/cdump/ranger-devicons2 
