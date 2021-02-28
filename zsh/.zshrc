@@ -24,6 +24,8 @@ alias lla="lsd -la"
 
 alias wineaudio="WINEPREFIX=$HOME/Audio/WineAudio wine"
 
+alias phoneaudio="pacmd load-module module-alsa-source device=hw:0,1,0"
+
 PATH="$HOME/.node_modules/bin:$PATH"
 export npm_config_prefix=~/.node_modules
 

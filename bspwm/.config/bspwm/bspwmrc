@@ -13,9 +13,11 @@ discord &
 vivaldi-stable &
 LD_PRELOAD=/usr/lib/spotify-adblock.so spotify & 
 telegram-desktop & 
+slack &
 wal -s -i ~/Stuff/Wallpapers/
 
 cpupower-gui -p
+#pacmd load-module module-alsa-source device=hw:0,1,0
 
 . "${HOME}/.cache/wal/colors.sh"
 
@@ -27,7 +29,7 @@ bspc config presel_feedback_color "$color1"
 xinput set-prop 20 309 1
 xinput set-prop 20 289 1
 
-bspc monitor -d term code browser music telegram discord spotify
+bspc monitor -d term code browser music telegram slack discord spotify
 
 bspc config border_width         2
 bspc config window_gap          12
@@ -44,7 +46,7 @@ bspc config pointer_action1 resize_side
 bspc config pointer_action1 resize_corner
 bspc config pointer_action3 move
 
-wmctrl -r Spotify -t 6
+wmctrl -r Spotify -t 7
 
 bspc config external_rules_command "$HOME/.config/bspwm/scripts/spotify.sh"
 bspc rule -a discord desktop=discord follow=off
@@ -56,3 +58,4 @@ bspc rule -a google-chrome desktop=browser follow=off
 bspc rule -a REAPER desktop=music follow=off
 bspc rule -a Cadence state=floating center=on
 bspc rule -a TelegramDesktop desktop=telegram follow=off
+bspc rule -a Slack desktop=slack follow=off
