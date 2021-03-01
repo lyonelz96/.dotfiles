@@ -1,7 +1,7 @@
 syntax on
 
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noselect
 set updatetime=50
 set shortmess+=c
 set noerrorbells
@@ -32,7 +32,10 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'sheerun/vim-polyglot'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'glepnir/lspsaga.nvim'
+Plug 'kosayoda/nvim-lightbulb'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -60,20 +63,13 @@ lua << EOF
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require 'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
+require 'lspconfig'.tsserver.setup{}
 
-require 'lspconfig'.html.setup{
-    capabilities = capabilities,
-    on_attach=require'completion'.on_attach
-}
+require 'lspconfig'.html.setup{capabilities = capabilities}
 
-require 'lspconfig'.cssls.setup{
-    capabilities = capabilities,
-    on_attach=require'completion'.on_attach
-}
+require 'lspconfig'.cssls.setup{capabilities = capabilities}
 
 require'lspconfig'.texlab.setup{
-    on_attach=require'completion'.on_attach,
     settings = {
         latex = {
             build = {
@@ -87,6 +83,21 @@ require'lspconfig'.texlab.setup{
 }
 EOF
 
+lua << EOF
+require'compe'.setup {
+  enabled = true;
+  source = {
+    path = true;
+    buffer = true;
+    nvim_lsp = true;
+  };
+}
+EOF
+
+lua << EOF
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+EOF
+
 let g:vimsyn_embed = 'l'
 
 let g:airline_theme = 'gruvbox_material'
@@ -95,9 +106,6 @@ let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeNaturalSort = 1
-
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy' ]
-let g:completion_trigger_on_delete = 1
 
 let mapleader=" "
 
@@ -121,17 +129,29 @@ nnoremap <C-p> <cmd>Telescope git_files<cr>
 nnoremap <leader>pb <cmd>Telescope buffers<cr>
 nnoremap <leader>vh <cmd>Telescope help_tags<cr>
 
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-nnoremap <leader>gd  :lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>gi  :lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>gr  :lua vim.lsp.buf.references()<CR>
-nnoremap <leader>gsh  :lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent>K   :lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>ff  :lua vim.lsp.buf.formatting()<CR>
-nnoremap <leader>rn  :lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>se  :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <leader>gpe :lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <leader>gne :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>sll :lua vim.lsp.diagnostic.set_loclist()<CR>
+
+nnoremap <silent><leader> gf <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+nnoremap <silent><leader> ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent><leader> ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
+nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+nnoremap <silent><leader> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+nnoremap <silent><leader> gr <cmd>lua require('lspsaga.rename').rename()<CR>
+nnoremap <silent><leader> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
+nnoremap <silent><leader> sd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+nnoremap <silent> <A-d> <cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR>
+tnoremap <silent> <A-d> <C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>
