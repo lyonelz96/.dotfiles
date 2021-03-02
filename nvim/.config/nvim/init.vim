@@ -81,6 +81,8 @@ require'lspconfig'.texlab.setup{
         }
     }
 }
+
+require'lspconfig'.sumneko_lua.setup{}
 EOF
 
 lua << EOF
@@ -141,17 +143,17 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 nnoremap <leader>ff  :lua vim.lsp.buf.formatting()<CR>
 nnoremap <leader>sll :lua vim.lsp.diagnostic.set_loclist()<CR>
 
-nnoremap <silent><leader> gf <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
-nnoremap <silent><leader> ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
-vnoremap <silent><leader> ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
-nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+nnoremap <leader>gf <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+nnoremap <leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
+nnoremap <silent>K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
 nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-nnoremap <silent><leader> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
-nnoremap <silent><leader> gr <cmd>lua require('lspsaga.rename').rename()<CR>
-nnoremap <silent><leader> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
-nnoremap <silent><leader> sd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
-nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
-nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+nnoremap <leader>gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+nnoremap <leader>gr <cmd>lua require('lspsaga.rename').rename()<CR>
+nnoremap <leader>gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
+nnoremap <leader>sd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+nnoremap <silent>[e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent>]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
 nnoremap <silent> <A-d> <cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR>
 tnoremap <silent> <A-d> <C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>
