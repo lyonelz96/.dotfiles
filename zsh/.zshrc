@@ -24,15 +24,17 @@ alias lla="lsd -la"
 
 alias wineaudio="WINEPREFIX=$HOME/Audio/WineAudio wine"
 
-alias phoneaudio="pacmd load-module module-alsa-source device=hw:0,1,1"
+alias phoneaudio="pacmd load-module module-alsa-source device=hw:Loopback,1,0"
 
 PATH="$HOME/.node_modules/bin:$PATH"
 export npm_config_prefix=~/.node_modules
-
-export DOTBARE_DIR="$HOME/.dotfiles"
-export EDITOR="nvim"
 
 export SOUND_CARD_IRQ=17
 
 export WINEFSYNC=1
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
+
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
+
+export PATH="$PATH:$HOME/.dotnet/tools"

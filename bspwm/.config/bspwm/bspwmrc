@@ -10,10 +10,9 @@ dunst &
 /usr/lib/geoclue-2.0/demos/agent & 
 redshift-gtk &
 discord &
-vivaldi-stable &
+brave &
 LD_PRELOAD=/usr/lib/spotify-adblock.so spotify & 
 telegram-desktop & 
-slack &
 wal -s -i ~/Stuff/Wallpapers/
 
 cpupower-gui -p
@@ -26,10 +25,10 @@ bspc config active_border_color "$color2"
 bspc config focused_border_color "$color15"
 bspc config presel_feedback_color "$color1"
 
-xinput set-prop 20 309 1
-xinput set-prop 20 289 1
+xinput set-prop 18 309 1
+xinput set-prop 18 289 1
 
-bspc monitor -d term code browser music telegram slack discord spotify
+bspc monitor -d term code browser music telegram discord spotify
 
 bspc config border_width         2
 bspc config window_gap          12
@@ -46,7 +45,7 @@ bspc config pointer_action1 resize_side
 bspc config pointer_action1 resize_corner
 bspc config pointer_action3 move
 
-wmctrl -r Spotify -t 7
+wmctrl -r Spotify -t 6
 
 bspc config external_rules_command "$HOME/.config/bspwm/scripts/spotify.sh"
 bspc rule -a discord desktop=discord follow=off
@@ -55,7 +54,7 @@ bspc rule -a mpv state=floating center=on
 bspc rule -a Vivaldi-stable desktop=browser follow=off
 bspc rule -a firefox desktop=browser follow=off
 bspc rule -a google-chrome desktop=browser follow=off
+bspc rule -a Brave-browser desktop=browser follow=off
 bspc rule -a REAPER desktop=music follow=off
 bspc rule -a Cadence state=floating center=on
 bspc rule -a TelegramDesktop desktop=telegram follow=off
-bspc rule -a Slack desktop=slack follow=off

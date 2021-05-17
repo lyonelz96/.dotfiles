@@ -22,7 +22,7 @@ set nohlsearch
 set hidden
 set colorcolumn=80
 
-set nocompatible
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'sainnhe/gruvbox-material'
@@ -31,20 +31,16 @@ Plug 'dylanaraps/wal.vim'
 Plug 'vim-airline/vim-airline'
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'sheerun/vim-polyglot'
 Plug 'hrsh7th/nvim-compe'
-Plug 'hrsh7th/vim-vsnip'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'kosayoda/nvim-lightbulb'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-
-Plug 'preservim/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'kyazdani42/nvim-web-devicons'
 
@@ -60,14 +56,7 @@ colorscheme gruvbox-material
 highlight Normal guibg=none ctermbg=none
 
 lua << EOF
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 require 'lspconfig'.tsserver.setup{}
-
-require 'lspconfig'.html.setup{capabilities = capabilities}
-
-require 'lspconfig'.cssls.setup{capabilities = capabilities}
 
 require'lspconfig'.texlab.setup{
     settings = {
@@ -82,7 +71,13 @@ require'lspconfig'.texlab.setup{
     }
 }
 
-require'lspconfig'.sumneko_lua.setup{}
+require'lspconfig'.clangd.setup{}
+
+require'lspconfig'.cmake.setup{}
+
+require'lspconfig'.pyls.setup{}
+
+require'lspconfig'.solargraph.setup{}
 EOF
 
 lua << EOF
@@ -104,11 +99,6 @@ let g:vimsyn_embed = 'l'
 
 let g:airline_theme = 'gruvbox_material'
 
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeNaturalSort = 1
-
 let mapleader=" "
 
 nnoremap <leader>h :wincmd h<CR>
@@ -120,11 +110,6 @@ nnoremap <silent> <Leader>- :vertical resize -5<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap <leader>p "_dP
-
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
 
 nnoremap <leader>pf <cmd>Telescope find_files<cr>
 nnoremap <C-p> <cmd>Telescope git_files<cr>
