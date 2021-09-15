@@ -159,6 +159,8 @@ lspconfig.sumneko_lua.setup({
 
 --- TEXLAB ---
 lspconfig.latex.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
 	settings = {
 		texlab = {
 			build = {
