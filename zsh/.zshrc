@@ -22,3 +22,5 @@ alias ls='exa --icons -l'
 alias la='exa --icons -la'
 alias lst='exa --icons -l --tree'
 alias lat='exa --icons -la --tree'
+
+eval "$(rbenv init -)"
