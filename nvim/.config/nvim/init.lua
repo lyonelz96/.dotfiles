@@ -13,12 +13,15 @@ require('paq')({
 	'eddyekofo94/gruvbox-flat.nvim',
 	'hoob3rt/lualine.nvim',
 	'kyazdani42/nvim-web-devicons',
+	'onsails/lspkind-nvim',
+	'romgrk/barbar.nvim',
 	--- LSP ---
 	'neovim/nvim-lspconfig',
 	'hrsh7th/nvim-cmp',
-	'hrsh7th/cmp-nvim-lsp',
 	'hrsh7th/cmp-buffer',
 	'hrsh7th/cmp-path',
+	'hrsh7th/cmp-nvim-lsp',
+	'hrsh7th/cmp-nvim-lua',
 	'saadparwaiz1/cmp_luasnip',
 	'L3MON4D3/LuaSnip',
 	'williamboman/nvim-lsp-installer',
@@ -34,6 +37,8 @@ require('paq')({
 -------------------- OPTIONS --------------------
 vim.cmd([[colorscheme gruvbox-flat]])
 vim.g.gruvbox_flat_style = 'dark'
+
+vim.opt.mouse:append('a')
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -133,13 +138,8 @@ end)
 -------------------- PLUGINS CONFIG ---------------------
 
 --- NVIM-CMP ---
-local has_words_before = function()
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-end
-
-local luasnip = require('luasnip')
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 
 cmp.setup({
 	snippet = {
@@ -152,50 +152,44 @@ cmp.setup({
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<C-e>'] = cmp.mapping.close(),
-		['<CR>'] = cmp.mapping.confirm({ select = true }),
-		['<Tab>'] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			elseif has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end, {
-			'i',
-			's',
-		}),
-		['<S-Tab>'] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, {
-			'i',
-			's',
-		}),
+		['<C-y>'] = cmp.mapping.confirm({ select = true }),
+		['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+		['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+		['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+		['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
 	},
 	sources = {
+		{ name = 'nvim_lua' },
 		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' },
 		{ name = 'path' },
+		{ name = 'luasnip' },
 		{ name = 'buffer' },
+	},
+	formatting = {
+		format = lspkind.cmp_format({
+			with_text = true,
+			menu = {
+				buffer = '[buf]',
+				nvim_lsp = '[LSP]',
+				nvim_lua = '[api]',
+				path = '[path]',
+				luasnip = '[snip]',
+			},
+		}),
+	},
+	experimental = {
+		ghost_text = true,
 	},
 })
 
 --- TELESCOPE ---
-map('n', '<C-p>', ':Telescope git_files<CR>')
+map('n', '<leader>tp', ':Telescope git_files<CR>')
 map('n', '<leader>tf', ':Telescope find_files<CR>')
 map('n', '<leader>tb', ':Telescope buffers<CR>')
 map('n', '<leader>th', ':Telescope help_tags<CR>')
 map('n', '<leader>tg', ':Telescope live_grep<CR>')
 map('n', '<leader>td', ':Telescope lsp_document_diagnostics<CR>')
-map('n', '<leader>tbr', ':Telescope file_browser<CR>')
+map('n', '<leader>te', ':Telescope file_browser<CR>')
 
 --- NVIM-TREE ---
 require('nvim-tree').setup()
@@ -211,6 +205,20 @@ require('lualine').setup({
 
 --- AUTOPAIRS ---
 require('nvim-autopairs').setup({})
+require('nvim-autopairs.completion.cmp').setup({
+	map_cr = true,
+	map_complete = true,
+	auto_select = true,
+	insert = false,
+	map_char = {
+		all = '(',
+		tex = '{',
+	},
+})
+
+--- BARBAR ---
+map('n', '<leader>bbp', ':BufferPick<CR>')
+map('n', '<leader>bbc', ':BufferClose<CR>')
 
 --- LIGHTBULB ---
 vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
