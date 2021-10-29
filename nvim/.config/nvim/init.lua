@@ -11,7 +11,7 @@ end
 require('paq')({
 	--- LOOKS ---
 	'eddyekofo94/gruvbox-flat.nvim',
-	'hoob3rt/lualine.nvim',
+	'nvim-lualine/lualine.nvim',
 	'kyazdani42/nvim-web-devicons',
 	'onsails/lspkind-nvim',
 	'romgrk/barbar.nvim',
