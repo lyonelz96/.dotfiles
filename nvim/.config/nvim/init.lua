@@ -24,6 +24,7 @@ require('paq')({
 	'hrsh7th/cmp-nvim-lua',
 	'saadparwaiz1/cmp_luasnip',
 	'L3MON4D3/LuaSnip',
+	'rafamadriz/friendly-snippets',
 	'williamboman/nvim-lsp-installer',
 	--- NAVIGATION ---
 	'nvim-lua/plenary.nvim',
@@ -116,17 +117,20 @@ lsp_installer.on_server_ready(function(server)
 	end
 
 	if server.name == 'diagnosticls' then
-		opts.filetypes = { 'lua' }
+		opts.filetypes = { 'lua', 'eruby' }
 		opts.init_options = {
 			formatters = {
 				stylua = {
 					command = 'stylua',
-					args = { '%file', '--quote-style', 'ForceSingle' },
-					doesWriteToFile = true,
+					args = { '--quote-style', 'ForceSingle', '-' },
+				},
+				erbbeautifier = {
+					command = 'htmlbeautifier',
 				},
 			},
 			formatFiletypes = {
 				lua = 'stylua',
+				eruby = 'erbbeautifier',
 			},
 		}
 	end
@@ -181,6 +185,9 @@ cmp.setup({
 		ghost_text = true,
 	},
 })
+
+--- LUASNIP ---
+require('luasnip/loaders/from_vscode').load()
 
 --- TELESCOPE ---
 map('n', '<leader>tp', ':Telescope git_files<CR>')
