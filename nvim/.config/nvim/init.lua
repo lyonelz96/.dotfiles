@@ -152,15 +152,18 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		['<C-d>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.close(),
-		['<C-y>'] = cmp.mapping.confirm({ select = true }),
 		['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 		['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 		['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
 		['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+		['<C-d>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.close(),
+		['<CR>'] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = false,
+		}),
 	},
 	sources = {
 		{ name = 'nvim_lua' },
@@ -212,16 +215,6 @@ require('lualine').setup({
 
 --- AUTOPAIRS ---
 require('nvim-autopairs').setup({})
-require('nvim-autopairs.completion.cmp').setup({
-	map_cr = true,
-	map_complete = true,
-	auto_select = true,
-	insert = false,
-	map_char = {
-		all = '(',
-		tex = '{',
-	},
-})
 
 --- BARBAR ---
 map('n', '<leader>bbp', ':BufferPick<CR>')
