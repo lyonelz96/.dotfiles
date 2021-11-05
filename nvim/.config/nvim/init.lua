@@ -126,6 +126,7 @@ lsp_installer.on_server_ready(function(server)
 				},
 				erbbeautifier = {
 					command = 'htmlbeautifier',
+                    args = {'-b', '1'}
 				},
 			},
 			formatFiletypes = {
@@ -193,13 +194,18 @@ cmp.setup({
 require('luasnip/loaders/from_vscode').load()
 
 --- TELESCOPE ---
-map('n', '<leader>tp', ':Telescope git_files<CR>')
-map('n', '<leader>tf', ':Telescope find_files<CR>')
-map('n', '<leader>tb', ':Telescope buffers<CR>')
-map('n', '<leader>th', ':Telescope help_tags<CR>')
-map('n', '<leader>tg', ':Telescope live_grep<CR>')
-map('n', '<leader>td', ':Telescope lsp_document_diagnostics<CR>')
-map('n', '<leader>te', ':Telescope file_browser<CR>')
+map('n', '<leader>tfp', ':Telescope git_files<CR>')
+map('n', '<leader>tff', ':Telescope find_files<CR>')
+map('n', '<leader>tfg', ':Telescope live_grep<CR>')
+map('n', '<leader>tfs', ':Telescope grep_string<CR>')
+map('n', '<leader>tfe', ':Telescope file_browser<CR>')
+map('n', '<leader>tvh', ':Telescope help_tags<CR>')
+map('n', '<leader>tvb', ':Telescope buffers<CR>')
+map('n', '<leader>tvf', ':Telescope current_buffer_fuzzy_find<CR>')
+map('n', '<leader>tld', ':Telescope lsp_document_diagnostics<CR>')
+map('n', '<leader>tlr', ':Telescope lsp_references<CR>')
+map('n', '<leader>tld', ':Telescope lsp_definitions<CR>')
+map('n', '<leader>tli', ':Telescope lsp_implementations<CR>')
 
 --- NVIM-TREE ---
 require('nvim-tree').setup()
@@ -219,6 +225,7 @@ require('nvim-autopairs').setup({})
 --- BARBAR ---
 map('n', '<leader>bbp', ':BufferPick<CR>')
 map('n', '<leader>bbc', ':BufferClose<CR>')
+map('n', '<leader>bbd', ':BufferCloseAllButCurrent<CR>')
 
 --- LIGHTBULB ---
 vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
