@@ -102,6 +102,16 @@ lsp_installer.on_server_ready(function(server)
 		capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 	}
 
+	if server.name == 'sumneko_lua' then
+		opts.settings = {
+			Lua = {
+				diagnostics = {
+					globals = { 'vim' },
+				},
+			},
+		}
+	end
+
 	if server.name == 'texlab' then
 		opts.settings = {
 			texlab = {
@@ -126,7 +136,7 @@ lsp_installer.on_server_ready(function(server)
 				},
 				erbbeautifier = {
 					command = 'htmlbeautifier',
-                    args = {'-b', '1'}
+					args = { '-b', '1' },
 				},
 			},
 			formatFiletypes = {
@@ -226,6 +236,8 @@ require('nvim-autopairs').setup({})
 map('n', '<leader>bbp', ':BufferPick<CR>')
 map('n', '<leader>bbc', ':BufferClose<CR>')
 map('n', '<leader>bbd', ':BufferCloseAllButCurrent<CR>')
+map('n', '<leader>bbh', ':BufferPrevious<CR>')
+map('n', '<leader>bbl', ':BufferNext<CR>')
 
 --- LIGHTBULB ---
 vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
