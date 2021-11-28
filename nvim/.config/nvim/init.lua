@@ -26,6 +26,7 @@ require('paq')({
 	'L3MON4D3/LuaSnip',
 	'rafamadriz/friendly-snippets',
 	'williamboman/nvim-lsp-installer',
+	'jose-elias-alvarez/null-ls.nvim',
 	--- NAVIGATION ---
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
@@ -126,26 +127,6 @@ lsp_installer.on_server_ready(function(server)
 		}
 	end
 
-	if server.name == 'diagnosticls' then
-		opts.filetypes = { 'lua', 'eruby' }
-		opts.init_options = {
-			formatters = {
-				stylua = {
-					command = 'stylua',
-					args = { '--quote-style', 'ForceSingle', '-' },
-				},
-				erbbeautifier = {
-					command = 'htmlbeautifier',
-					args = { '-b', '1' },
-				},
-			},
-			formatFiletypes = {
-				lua = 'stylua',
-				eruby = 'erbbeautifier',
-			},
-		}
-	end
-
 	server:setup(opts)
 	vim.cmd([[ do User LspAttachBuffers ]])
 end)
@@ -163,18 +144,13 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-		['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-		['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-		['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+		['<C-n>'] = cmp.mapping.select_next_item(),
+		['<C-p>'] = cmp.mapping.select_prev_item(),
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<C-e>'] = cmp.mapping.close(),
-		['<CR>'] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = false,
-		}),
+		['<CR>'] = cmp.mapping.confirm({ select = false }),
 	},
 	sources = {
 		{ name = 'nvim_lua' },
@@ -199,6 +175,19 @@ cmp.setup({
 		ghost_text = true,
 	},
 })
+
+--- NULL-LS ---
+local null_ls = require('null-ls')
+
+null_ls.config({
+	sources = {
+		null_ls.builtins.formatting.stylua.with({
+			extra_args = { '--quote-style', 'ForceSingle' },
+		}),
+	},
+})
+
+require('lspconfig')['null-ls'].setup({})
 
 --- LUASNIP ---
 require('luasnip/loaders/from_vscode').load()
