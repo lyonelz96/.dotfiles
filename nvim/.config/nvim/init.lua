@@ -34,6 +34,8 @@ require('paq')({
 	--- MISC ---
 	'kosayoda/nvim-lightbulb',
 	'windwp/nvim-autopairs',
+	'folke/which-key.nvim',
+	'numToStr/Comment.nvim',
 })
 
 -------------------- OPTIONS --------------------
@@ -230,3 +232,18 @@ map('n', '<leader>bbl', ':BufferNext<CR>')
 
 --- LIGHTBULB ---
 vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
+
+--- WHICH KEY ---
+require('which-key').setup({})
+
+--- COMMENT ---
+require('Comment').setup({
+    toggler = {
+        line = '<leader>gcc',
+        block = '<leader>gbc',
+    },
+    opleader = {
+        line = '<leader>gc',
+        block = '<leader>gb',
+    }
+})

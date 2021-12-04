@@ -23,4 +23,6 @@ alias la='exa --icons -la'
 alias lst='exa --icons -l --tree'
 alias lat='exa --icons -la --tree'
 
+alias nt='open . -a iterm'
+
 eval "$(rbenv init - zsh)"
