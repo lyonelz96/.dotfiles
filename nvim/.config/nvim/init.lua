@@ -43,6 +43,7 @@ vim.cmd([[colorscheme gruvbox-flat]])
 vim.g.gruvbox_flat_style = 'dark'
 
 vim.opt.mouse:append('a')
+vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
