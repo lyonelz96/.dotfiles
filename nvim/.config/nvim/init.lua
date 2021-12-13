@@ -182,15 +182,13 @@ cmp.setup({
 --- NULL-LS ---
 local null_ls = require('null-ls')
 
-null_ls.config({
+null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.stylua.with({
 			extra_args = { '--quote-style', 'ForceSingle' },
 		}),
 	},
 })
-
-require('lspconfig')['null-ls'].setup({})
 
 --- LUASNIP ---
 require('luasnip/loaders/from_vscode').load()
@@ -204,7 +202,7 @@ map('n', '<leader>tfe', ':Telescope file_browser<CR>')
 map('n', '<leader>tvh', ':Telescope help_tags<CR>')
 map('n', '<leader>tvb', ':Telescope buffers<CR>')
 map('n', '<leader>tvf', ':Telescope current_buffer_fuzzy_find<CR>')
-map('n', '<leader>tld', ':Telescope lsp_document_diagnostics<CR>')
+map('n', '<leader>tlD', ':Telescope lsp_document_diagnostics<CR>')
 map('n', '<leader>tlr', ':Telescope lsp_references<CR>')
 map('n', '<leader>tld', ':Telescope lsp_definitions<CR>')
 map('n', '<leader>tli', ':Telescope lsp_implementations<CR>')
