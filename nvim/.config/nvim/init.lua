@@ -15,6 +15,7 @@ require('paq')({
 	'kyazdani42/nvim-web-devicons',
 	'onsails/lspkind-nvim',
 	'romgrk/barbar.nvim',
+	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 	--- LSP ---
 	'neovim/nvim-lspconfig',
 	'hrsh7th/nvim-cmp',
@@ -244,5 +245,12 @@ require('Comment').setup({
 	opleader = {
 		line = '<leader>gc',
 		block = '<leader>gb',
+	},
+})
+
+--- TREESITTER ---
+require('nvim-treesitter.configs').setup({
+	highlight = {
+		enable = true,
 	},
 })
