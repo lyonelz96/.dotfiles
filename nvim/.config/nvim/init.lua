@@ -11,7 +11,6 @@ end
 require('paq')({
 	--- LOOKS ---
 	'eddyekofo94/gruvbox-flat.nvim',
-	'rebelot/kanagawa.nvim',
 	'nvim-lualine/lualine.nvim',
 	'kyazdani42/nvim-web-devicons',
 	'onsails/lspkind-nvim',
@@ -215,11 +214,7 @@ require('nvim-tree').setup()
 map('n', '<leader>nvt', ':NvimTreeToggle<CR>')
 
 --- LUALINE ---
-require('lualine').setup({
-	options = {
-		theme = 'gruvbox-flat',
-	},
-})
+require('lualine').setup({})
 
 --- AUTOPAIRS ---
 require('nvim-autopairs').setup({})
