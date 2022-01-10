@@ -117,20 +117,6 @@ lsp_installer.on_server_ready(function(server)
 		}
 	end
 
-	if server.name == 'texlab' then
-		opts.settings = {
-			texlab = {
-				build = {
-					executable = 'latexmk',
-					args = { '-pvc', '-lualatex', '-outdir=./build' },
-					outputDirectory = './build',
-					onSave = true,
-				},
-				auxDirectory = './build',
-			},
-		}
-	end
-
 	server:setup(opts)
 	vim.cmd([[ do User LspAttachBuffers ]])
 end)
