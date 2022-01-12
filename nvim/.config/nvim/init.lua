@@ -32,6 +32,7 @@ require('paq')({
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
 	'kyazdani42/nvim-tree.lua',
+	'ggandor/lightspeed.nvim',
 	--- MISC ---
 	'kosayoda/nvim-lightbulb',
 	'windwp/nvim-autopairs',
