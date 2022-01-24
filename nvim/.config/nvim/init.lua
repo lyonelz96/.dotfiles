@@ -11,6 +11,7 @@ end
 require('paq')({
 	--- LOOKS ---
 	'eddyekofo94/gruvbox-flat.nvim',
+	'rebelot/kanagawa.nvim',
 	'nvim-lualine/lualine.nvim',
 	'kyazdani42/nvim-web-devicons',
 	'onsails/lspkind-nvim',
@@ -41,7 +42,7 @@ require('paq')({
 })
 
 -------------------- OPTIONS --------------------
-vim.cmd([[colorscheme gruvbox-flat]])
+vim.cmd([[colorscheme kanagawa]])
 vim.g.gruvbox_flat_style = 'dark'
 
 vim.opt.mouse:append('a')
