@@ -1,6 +1,3 @@
 nvim/**/undodir
 nvim/**/.netrwhist
 nvim/**/plugged
-
-ranger/**/__init__.py
-ranger/**/__pycache__
