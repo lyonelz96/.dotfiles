@@ -17,4 +17,6 @@ alias lat='exa --icons -la --tree'
 
 alias nt='open . -a iterm'
 
+alias gg='git log --oneline --abbrev-commit --all --graph --decorate --color'
+
 eval "$(starship init zsh)"
