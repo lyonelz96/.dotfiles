@@ -72,7 +72,6 @@ vim.opt.termguicolors = true
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.hidden = true
 vim.opt.showmode = false
-vim.opt.shortmess = 'c'
 vim.opt.background = 'dark'
 vim.cmd('set undodir=~/.config/nvim/undodir')
 
