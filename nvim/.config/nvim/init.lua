@@ -16,7 +16,12 @@ require('paq')({
 	'kyazdani42/nvim-web-devicons',
 	'onsails/lspkind-nvim',
 	'romgrk/barbar.nvim',
-	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+	{
+		'nvim-treesitter/nvim-treesitter',
+		run = function()
+			vim.cmd('TSUpdate')
+		end,
+	},
 	--- LSP ---
 	'neovim/nvim-lspconfig',
 	'hrsh7th/nvim-cmp',
