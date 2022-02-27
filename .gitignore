@@ -1,3 +1,2 @@
 nvim/**/undodir
-nvim/**/.netrwhist
-nvim/**/plugged
+nvim/**/plugin

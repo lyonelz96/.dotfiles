@@ -18,6 +18,7 @@ alias lat='exa --icons -la --tree'
 alias nt='open . -a iterm'
 
 alias gg='git log --oneline --abbrev-commit --all --graph --decorate --color'
+alias gs='git status'
 
 alias bu='brew update && brew upgrade && brew autoremove && brew cleanup'
 

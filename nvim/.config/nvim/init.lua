@@ -8,44 +8,42 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -------------------- PLUGINS --------------------
-require('paq')({
+require('packer').startup(function(use)
 	--- LOOKS ---
-	'eddyekofo94/gruvbox-flat.nvim',
-	'rebelot/kanagawa.nvim',
-	'nvim-lualine/lualine.nvim',
-	'kyazdani42/nvim-web-devicons',
-	'onsails/lspkind-nvim',
-	'romgrk/barbar.nvim',
-	{
-		'nvim-treesitter/nvim-treesitter',
-		run = function()
-			vim.cmd('TSUpdate')
-		end,
-	},
-	--- LSP ---
-	'neovim/nvim-lspconfig',
-	'hrsh7th/nvim-cmp',
-	'hrsh7th/cmp-buffer',
-	'hrsh7th/cmp-path',
-	'hrsh7th/cmp-nvim-lsp',
-	'hrsh7th/cmp-nvim-lua',
-	'saadparwaiz1/cmp_luasnip',
-	'L3MON4D3/LuaSnip',
-	'rafamadriz/friendly-snippets',
-	'williamboman/nvim-lsp-installer',
-	'jose-elias-alvarez/null-ls.nvim',
-	--- NAVIGATION ---
-	'nvim-lua/plenary.nvim',
-	'nvim-telescope/telescope.nvim',
-	'kyazdani42/nvim-tree.lua',
-	'ggandor/lightspeed.nvim',
-	--- MISC ---
-	'kosayoda/nvim-lightbulb',
-	'windwp/nvim-autopairs',
-	'folke/which-key.nvim',
-	'numToStr/Comment.nvim',
-})
+	use('eddyekofo94/gruvbox-flat.nvim')
+	use('rebelot/kanagawa.nvim')
+	use('nvim-lualine/lualine.nvim')
+	use('kyazdani42/nvim-web-devicons')
+	use('onsails/lspkind-nvim')
+	use('romgrk/barbar.nvim')
+	use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
 
+	--- LSP ---
+	use('neovim/nvim-lspconfig')
+	use('hrsh7th/nvim-cmp')
+	use('hrsh7th/cmp-buffer')
+	use('hrsh7th/cmp-path')
+	use('hrsh7th/cmp-nvim-lsp')
+	use('hrsh7th/cmp-nvim-lua')
+	use('saadparwaiz1/cmp_luasnip')
+	use('L3MON4D3/LuaSnip')
+	use('rafamadriz/friendly-snippets')
+	use('williamboman/nvim-lsp-installer')
+	use('jose-elias-alvarez/null-ls.nvim')
+
+	--- NAVIGATION ---
+	use('nvim-lua/plenary.nvim')
+	use('nvim-telescope/telescope.nvim')
+	use('kyazdani42/nvim-tree.lua')
+	use('ggandor/lightspeed.nvim')
+
+	--- MISC ---
+	use('kosayoda/nvim-lightbulb')
+	use('windwp/nvim-autopairs')
+	use('folke/which-key.nvim')
+	use('numToStr/Comment.nvim')
+	use('wbthomason/packer.nvim')
+end)
 -------------------- OPTIONS --------------------
 vim.cmd([[colorscheme kanagawa]])
 vim.g.gruvbox_flat_style = 'dark'
