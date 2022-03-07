@@ -121,6 +121,10 @@ lsp_installer.on_server_ready(function(server)
 		}
 	end
 
+	if server.name == 'emmet_ls' then
+		opts.filetypes = { 'html', 'css', 'eruby' }
+	end
+
 	server:setup(opts)
 	vim.cmd([[ do User LspAttachBuffers ]])
 end)
