@@ -228,7 +228,7 @@ require('nvim-autopairs').setup({})
 --- BARBAR ---
 map('n', '<leader>bbp', ':BufferPick<CR>')
 map('n', '<leader>bbc', ':BufferClose<CR>')
-map('n', '<leader>bbd', ':BufferCloseAllButCurrent<CR>')
+map('n', '<leader>bbd', ':BufferCloseAllButPinned<CR>')
 map('n', '<leader>bbh', ':BufferPrevious<CR>')
 map('n', '<leader>bbl', ':BufferNext<CR>')
 
