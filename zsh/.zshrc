@@ -19,6 +19,9 @@ alias nt='open . -a iterm'
 
 alias gg='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias gs='git status'
+alias gc='git commit'
+alias ga='git add'
+alias gall='git add .'
 
 alias bu='brew update && brew upgrade && brew autoremove && brew cleanup'
 
