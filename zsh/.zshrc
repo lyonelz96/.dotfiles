@@ -22,6 +22,7 @@ alias gs='git status'
 alias gc='git commit'
 alias ga='git add'
 alias gall='git add .'
+alias gch='git checkout'
 
 alias bu='brew update && brew upgrade && brew autoremove && brew cleanup'
 
