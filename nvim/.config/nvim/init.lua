@@ -1,48 +1,48 @@
 -------------------- HELPERS --------------------
 local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true }
-	if opts then
-		options = vim.tbl_extend('force', options, opts)
-	end
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    local options = { noremap = true }
+    if opts then
+        options = vim.tbl_extend('force', options, opts)
+    end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 -------------------- PLUGINS --------------------
 require('packer').startup(function(use)
-	--- LOOKS ---
-	use('eddyekofo94/gruvbox-flat.nvim')
-	use('rebelot/kanagawa.nvim')
-	use('nvim-lualine/lualine.nvim')
-	use('kyazdani42/nvim-web-devicons')
-	use('onsails/lspkind-nvim')
-	use('romgrk/barbar.nvim')
-	use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+    --- LOOKS ---
+    use('eddyekofo94/gruvbox-flat.nvim')
+    use('rebelot/kanagawa.nvim')
+    use('nvim-lualine/lualine.nvim')
+    use('kyazdani42/nvim-web-devicons')
+    use('onsails/lspkind-nvim')
+    use('romgrk/barbar.nvim')
+    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
 
-	--- LSP ---
-	use('neovim/nvim-lspconfig')
-	use('hrsh7th/nvim-cmp')
-	use('hrsh7th/cmp-buffer')
-	use('hrsh7th/cmp-path')
-	use('hrsh7th/cmp-nvim-lsp')
-	use('hrsh7th/cmp-nvim-lua')
-	use('saadparwaiz1/cmp_luasnip')
-	use('L3MON4D3/LuaSnip')
-	use('rafamadriz/friendly-snippets')
-	use('williamboman/nvim-lsp-installer')
-	use('jose-elias-alvarez/null-ls.nvim')
+    --- LSP ---
+    use('neovim/nvim-lspconfig')
+    use('hrsh7th/nvim-cmp')
+    use('hrsh7th/cmp-buffer')
+    use('hrsh7th/cmp-path')
+    use('hrsh7th/cmp-nvim-lsp')
+    use('hrsh7th/cmp-nvim-lua')
+    use('saadparwaiz1/cmp_luasnip')
+    use('L3MON4D3/LuaSnip')
+    use('rafamadriz/friendly-snippets')
+    use('williamboman/nvim-lsp-installer')
+    use('jose-elias-alvarez/null-ls.nvim')
 
-	--- NAVIGATION ---
-	use('nvim-lua/plenary.nvim')
-	use('nvim-telescope/telescope.nvim')
-	use('kyazdani42/nvim-tree.lua')
-	use('ggandor/lightspeed.nvim')
+    --- NAVIGATION ---
+    use('nvim-lua/plenary.nvim')
+    use('nvim-telescope/telescope.nvim')
+    use('kyazdani42/nvim-tree.lua')
+    use('ggandor/lightspeed.nvim')
 
-	--- MISC ---
-	use('kosayoda/nvim-lightbulb')
-	use('windwp/nvim-autopairs')
-	use('folke/which-key.nvim')
-	use('numToStr/Comment.nvim')
-	use('wbthomason/packer.nvim')
+    --- MISC ---
+    use('kosayoda/nvim-lightbulb')
+    use('windwp/nvim-autopairs')
+    use('folke/which-key.nvim')
+    use('numToStr/Comment.nvim')
+    use('wbthomason/packer.nvim')
 end)
 -------------------- OPTIONS --------------------
 vim.cmd([[colorscheme kanagawa]])
@@ -104,31 +104,45 @@ map('n', '<leader>vn', ':lua vim.lsp.diagnostic.goto_next()<CR>')
 map('n', '<leader>vp', ':lua vim.lsp.diagnostic.goto_prev()<CR>')
 
 --- LSPINSTALLER ---
-local lsp_installer = require('nvim-lsp-installer')
+require('nvim-lsp-installer').setup({})
 
-lsp_installer.on_server_ready(function(server)
-	local opts = {
-		capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-	}
+--- LSPCONFIG ---
+local lspconfig = require('lspconfig')
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-	if server.name == 'sumneko_lua' then
-		opts.settings = {
-			Lua = {
-				diagnostics = {
-					globals = { 'vim' },
-				},
-			},
-		}
-	end
+lspconfig.emmet_ls.setup({
+    filetypes = { 'html', 'css', 'eruby' },
+    capabilities = capabilities,
+})
 
-	if server.name == 'emmet_ls' then
-		opts.filetypes = { 'html', 'css', 'eruby' }
-	end
+lspconfig.html.setup({
+    capabilities = capabilities,
+})
 
-	server:setup(opts)
-	vim.cmd([[ do User LspAttachBuffers ]])
-end)
+lspconfig.solargraph.setup({
+    capabilities = capabilities,
+})
 
+lspconfig.sumneko_lua.setup({
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' },
+            },
+            format = {
+                enable = true,
+                defaultConfig = {
+                    quote_style = 'single',
+                },
+            },
+        },
+    },
+    capabilities = capabilities,
+})
+
+lspconfig.tsserver.setup({
+    capabilities = capabilities,
+})
 -------------------- PLUGINS CONFIG ---------------------
 
 --- NVIM-CMP ---
@@ -136,65 +150,62 @@ local cmp = require('cmp')
 local lspkind = require('lspkind')
 
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			require('luasnip').lsp_expand(args.body)
-		end,
-	},
-	mapping = {
-		['<C-n>'] = cmp.mapping.select_next_item(),
-		['<C-p>'] = cmp.mapping.select_prev_item(),
-		['<C-d>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.close(),
-		['<CR>'] = cmp.mapping.confirm({ select = false }),
-	},
-	sources = {
-		{ name = 'nvim_lua' },
-		{ name = 'nvim_lsp' },
-		{ name = 'path' },
-		{ name = 'luasnip' },
-		{ name = 'buffer' },
-	},
-	formatting = {
-		format = lspkind.cmp_format({
-			with_text = true,
-			menu = {
-				buffer = '[buf]',
-				nvim_lsp = '[LSP]',
-				nvim_lua = '[api]',
-				path = '[path]',
-				luasnip = '[snip]',
-			},
-		}),
-	},
-	experimental = {
-		ghost_text = true,
-	},
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
+    mapping = {
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    },
+    sources = {
+        { name = 'nvim_lua' },
+        { name = 'nvim_lsp' },
+        { name = 'path' },
+        { name = 'luasnip' },
+        { name = 'buffer' },
+    },
+    formatting = {
+        format = lspkind.cmp_format({
+            with_text = true,
+            menu = {
+                buffer = '[buf]',
+                nvim_lsp = '[LSP]',
+                nvim_lua = '[api]',
+                path = '[path]',
+                luasnip = '[snip]',
+            },
+        }),
+    },
+    experimental = {
+        ghost_text = true,
+    },
 })
 
 --- NULL-LS ---
 local null_ls = require('null-ls')
 
 local eruby_beautifier = {
-	name = 'eruby-beautifier',
-	method = null_ls.methods.FORMATTING,
-	generator = require('null-ls.helpers').formatter_factory({
-		command = 'htmlbeautifier',
-		args = { '--keep-blank-lines', '1' },
-		to_stdin = true,
-	}),
-	filetypes = { 'eruby' },
+    name = 'eruby-beautifier',
+    method = null_ls.methods.FORMATTING,
+    generator = require('null-ls.helpers').formatter_factory({
+        command = 'htmlbeautifier',
+        args = { '--keep-blank-lines', '1' },
+        to_stdin = true,
+    }),
+    filetypes = { 'eruby' },
 }
 
 null_ls.setup({
-	sources = {
-		null_ls.builtins.formatting.stylua.with({
-			extra_args = { '--quote-style', 'ForceSingle' },
-		}),
-		eruby_beautifier,
-	},
+    sources = {
+        eruby_beautifier,
+    },
 })
 
 --- LUASNIP ---
@@ -240,19 +251,19 @@ require('which-key').setup({})
 
 --- COMMENT ---
 require('Comment').setup({
-	toggler = {
-		line = '<leader>gcc',
-		block = '<leader>gbc',
-	},
-	opleader = {
-		line = '<leader>gc',
-		block = '<leader>gb',
-	},
+    toggler = {
+        line = '<leader>gcc',
+        block = '<leader>gbc',
+    },
+    opleader = {
+        line = '<leader>gc',
+        block = '<leader>gb',
+    },
 })
 
 --- TREESITTER ---
 require('nvim-treesitter.configs').setup({
-	highlight = {
-		enable = true,
-	},
+    highlight = {
+        enable = true,
+    },
 })
