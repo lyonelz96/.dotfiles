@@ -30,6 +30,7 @@ require('packer').startup(function(use)
     use('rafamadriz/friendly-snippets')
     use('williamboman/nvim-lsp-installer')
     use('jose-elias-alvarez/null-ls.nvim')
+    use('ray-x/lsp_signature.nvim')
 
     --- NAVIGATION ---
     use('nvim-lua/plenary.nvim')
@@ -47,6 +48,8 @@ end)
 -------------------- OPTIONS --------------------
 vim.cmd([[colorscheme kanagawa]])
 vim.g.gruvbox_flat_style = 'dark'
+
+vim.api.nvim_set_hl(0, 'Normal', { ctermbg = 'none' })
 
 vim.opt.mouse:append('a')
 vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
@@ -143,6 +146,8 @@ lspconfig.sumneko_lua.setup({
 lspconfig.tsserver.setup({
     capabilities = capabilities,
 })
+
+lspconfig.rust_analyzer.setup({})
 -------------------- PLUGINS CONFIG ---------------------
 
 --- NVIM-CMP ---
@@ -188,6 +193,9 @@ cmp.setup({
     },
 })
 
+--- LSP SIGNATURE ---
+require('lsp_signature').setup({})
+
 --- NULL-LS ---
 local null_ls = require('null-ls')
 
@@ -226,7 +234,7 @@ map('n', '<leader>tld', ':Telescope lsp_definitions<CR>')
 map('n', '<leader>tli', ':Telescope lsp_implementations<CR>')
 
 --- NVIM-TREE ---
-require('nvim-tree').setup()
+require('nvim-tree').setup({})
 
 map('n', '<leader>nvt', ':NvimTreeToggle<CR>')
 
