@@ -46,40 +46,7 @@ require('packer').startup(function(use)
     use('wbthomason/packer.nvim')
 end)
 -------------------- OPTIONS --------------------
-vim.cmd([[colorscheme kanagawa]])
-vim.g.gruvbox_flat_style = 'dark'
-
-vim.api.nvim_set_hl(0, 'Normal', { ctermbg = 'none' })
-
-vim.opt.mouse:append('a')
-vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
-
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.smartindent = true
-vim.opt.undofile = true
-vim.opt.swapfile = false
-
-vim.opt.relativenumber = true
-vim.opt.number = true
-vim.opt.wrap = false
-vim.opt.signcolumn = 'yes'
-vim.opt.colorcolumn = '80'
-vim.opt.cursorline = true
-
-vim.opt.backup = false
-vim.opt.incsearch = true
-vim.opt.hlsearch = false
-vim.opt.scrolloff = 8
-vim.opt.cmdheight = 1
-vim.opt.termguicolors = true
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-vim.opt.hidden = true
-vim.opt.showmode = false
-vim.opt.background = 'dark'
-vim.cmd('set undodir=~/.config/nvim/undodir')
+require('options')
 
 -------------------- MAPPINGS ----------------------
 vim.g.mapleader = ' '
