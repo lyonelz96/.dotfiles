@@ -63,6 +63,8 @@ alias ga='git add'
 alias gall='git add .'
 alias gch='git checkout'
 alias gp='git push'
+alias gr='git rebase'
+alias gri='git rebase -i'
 
 alias bu='brew update && brew upgrade && brew autoremove && brew cleanup'
 
