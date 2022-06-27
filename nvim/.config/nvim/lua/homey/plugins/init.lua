@@ -5,7 +5,6 @@ require('homey.plugins.configs.lsp')
 require('homey.plugins.configs.cmp')
 require('homey.plugins.configs.lsp_signature')
 require('homey.plugins.configs.null_ls')
-require('homey.plugins.configs.luasnip')
 
 --- QOL ---
 require('homey.plugins.configs.autopairs')
