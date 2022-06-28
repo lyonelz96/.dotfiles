@@ -1,5 +1,3 @@
-require('telescope').load_extension('fzf')
-
 vim.keymap.set('n', '<leader>tff', require('telescope.builtin').find_files, { desc = '[T]elescope [F]ind [F]iles' })
 vim.keymap.set('n', '<leader>tp', require('telescope.builtin').git_files, { desc = '[T]elescope Ctrl-[P]' })
 vim.keymap.set('n', '<leader>tgs', require('telescope.builtin').grep_string, { desc = '[T]elescope [G]rep [S]tring' })

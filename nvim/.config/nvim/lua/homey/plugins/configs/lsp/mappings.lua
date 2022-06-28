@@ -1,4 +1,4 @@
-local on_attach = function(_, bufnr)
+local lsp_mappings = function(bufnr)
 	local nmap = function(keys, func, desc)
 		vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
 	end
@@ -23,50 +23,4 @@ local on_attach = function(_, bufnr)
 	)
 end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-require('nvim-lsp-installer').setup({})
-
-require('lspconfig').emmet_ls.setup({
-	capabilities = capabilities,
-	filetypes = { 'html', 'css', 'eruby' },
-	on_attach = on_attach,
-})
-
-require('lspconfig').html.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-
-require('lspconfig').solargraph.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-
-require('lspconfig').sumneko_lua.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { 'vim' },
-			},
-			format = {
-				enable = true,
-				defaultConfig = {
-					quote_style = 'single',
-				},
-			},
-		},
-	},
-})
-
-require('lspconfig').tsserver.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-
-require('lspconfig').rust_analyzer.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
+return lsp_mappings
