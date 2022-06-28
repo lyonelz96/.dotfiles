@@ -9,13 +9,6 @@ wk.register({
 		c = { name = 'BufferCloseOpts' },
 	},
 	c = { name = 'Comment' },
-	l = {
-		name = 'LSP',
-		c = { name = 'Code Action' },
-		g = { name = 'Goto' },
-		r = { name = 'Rename' },
-		s = { name = 'Signature' },
-	},
 	n = {
 		name = 'NvimTree',
 		v = { name = 'Toggle' },
@@ -25,12 +18,6 @@ wk.register({
 		b = { name = 'Buffer' },
 		f = { name = 'Find' },
 		g = { name = 'Grep' },
-		l = {
-			name = 'LSP',
-			t = { name = 'Type' },
-			w = { name = 'Workspace' },
-			d = { name = 'Document' },
-		},
 	},
 	w = { name = 'Window' },
 }, { prefix = '<leader>', mode = 'n' })

@@ -21,6 +21,25 @@ local lsp_mappings = function(bufnr)
 		require('telescope.builtin').lsp_dynamic_workspace_symbols,
 		'[T]elescope [L]SP [W]orkspace [S]ymbols'
 	)
+
+	require('which-key').register({
+		l = {
+			name = 'LSP',
+			c = { name = 'Code Action' },
+			g = { name = 'Goto' },
+			r = { name = 'Rename' },
+			s = { name = 'Signature' },
+		},
+		t = {
+			name = 'Telescope',
+			l = {
+				name = 'LSP',
+				t = { name = 'Type' },
+				w = { name = 'Workspace' },
+				d = { name = 'Document' },
+			},
+		},
+	}, { prefix = '<leader>', buffer = 0, mode = 'n' })
 end
 
 return lsp_mappings
