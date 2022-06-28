@@ -2,20 +2,32 @@ require('which-key').setup({})
 
 require('which-key').register({
 	d = { name = 'Diagnostic' },
-	b = { name = 'BarBar', c = 'BufferCloseOpts' },
+	b = {
+		name = 'BarBar',
+		c = { name = 'BufferCloseOpts' },
+	},
 	g = { name = 'Comment' },
-	l = { name = 'LSP', c = 'Code Action', g = 'Goto', r = 'Rename', s = 'Signature' },
-	n = { name = 'NvimTree', v = 'Toggle' },
+	l = {
+		name = 'LSP',
+		c = { name = 'Code Action' },
+		g = { name = 'Goto' },
+		r = { name = 'Rename' },
+		s = { name = 'Signature' },
+	},
+	n = {
+		name = 'NvimTree',
+		v = { name = 'Toggle' },
+	},
 	t = {
 		name = 'Telescope',
-		b = 'Buffer',
-		f = 'Find',
-		g = 'Grep',
+		b = { name = 'Buffer' },
+		f = { name = 'Find' },
+		g = { name = 'Grep' },
 		l = {
 			name = 'LSP',
-			t = 'Type',
-			w = 'Workspace',
-			d = 'Document',
+			t = { name = 'Type' },
+			w = { name = 'Workspace' },
+			d = { name = 'Document' },
 		},
 	},
 	w = { name = 'Window' },
