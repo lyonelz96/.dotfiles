@@ -1,12 +1,14 @@
-require('which-key').setup({})
+local wk = require('which-key')
 
-require('which-key').register({
+wk.setup({})
+
+wk.register({
 	d = { name = 'Diagnostic' },
 	b = {
 		name = 'BarBar',
 		c = { name = 'BufferCloseOpts' },
 	},
-	g = { name = 'Comment' },
+	c = { name = 'Comment' },
 	l = {
 		name = 'LSP',
 		c = { name = 'Code Action' },
@@ -31,4 +33,8 @@ require('which-key').register({
 		},
 	},
 	w = { name = 'Window' },
-}, { prefix = '<leader>' })
+}, { prefix = '<leader>', mode = 'n' })
+
+wk.register({
+	c = { name = 'Comment' },
+}, { prefix = '<leader>', mode = 'v' })
