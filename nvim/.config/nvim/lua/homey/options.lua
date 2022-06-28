@@ -4,7 +4,9 @@ vim.api.nvim_set_hl(0, 'Normal', { ctermbg = 'none' })
 
 vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 	pattern = { '*' },
-	command = 'set formatoptions-=cro',
+	callback = function()
+		vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
+	end,
 })
 
 vim.opt.tabstop = 4
