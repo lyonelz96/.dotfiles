@@ -54,6 +54,9 @@ cmp.setup({
 	experimental = {
 		ghost_text = true,
 	},
+	preselect = {
+		cmp.PreselectMode.None,
+	},
 })
 
 require('luasnip.loaders.from_vscode').lazy_load()
