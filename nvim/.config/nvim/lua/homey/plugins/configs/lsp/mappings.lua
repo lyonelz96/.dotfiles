@@ -42,4 +42,6 @@ local lsp_mappings = function(bufnr)
 	}, { prefix = '<leader>', buffer = 0, mode = 'n' })
 end
 
-return lsp_mappings
+return {
+	lsp_mappings = lsp_mappings,
+}
