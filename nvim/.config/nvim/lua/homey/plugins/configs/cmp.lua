@@ -11,7 +11,7 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
-	mapping = {
+	mapping = cmp.mapping.preset.insert({
 		['<C-n>'] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -31,7 +31,7 @@ cmp.setup({
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<C-x>'] = cmp.mapping.abort(),
 		['<CR>'] = cmp.mapping.confirm({ select = false }),
-	},
+	}),
 	sources = {
 		{ name = 'nvim_lua' },
 		{ name = 'nvim_lsp' },
