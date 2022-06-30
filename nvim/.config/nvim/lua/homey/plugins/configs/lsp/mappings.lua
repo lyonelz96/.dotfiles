@@ -39,7 +39,7 @@ local lsp_mappings = function(bufnr)
 				d = { name = 'Document' },
 			},
 		},
-	}, { prefix = '<leader>', buffer = 0, mode = 'n' })
+	}, { prefix = '<leader>', buffer = bufnr, mode = 'n' })
 end
 
 return {
