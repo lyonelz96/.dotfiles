@@ -1,4 +1,6 @@
-local lsp_mappings = function(bufnr)
+local M = {}
+
+M.set_lsp_mappings = function(bufnr)
 	local nmap = function(keys, func, desc)
 		vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
 	end
@@ -12,14 +14,14 @@ local lsp_mappings = function(bufnr)
 	nmap('<leader>lf', vim.lsp.buf.formatting, '[L]SP [F]ormat')
 
 	nmap('<leader>tlr', require('telescope.builtin').lsp_references, '[T]elescope [L]SP [R]eferences')
-	nmap('<leader>tlds', require('telescope.builtin').lsp_document_symbols, '[T]elescope [L]SP [D]ocument [S]ymbols')
+	nmap('<leader>tlsd', require('telescope.builtin').lsp_document_symbols, '[T]elescope [L]SP [S]ymbols [D]ocument ')
 	nmap('<leader>tli', require('telescope.builtin').lsp_implementations, '[T]elescope [L]SP [I]mplementations')
 	nmap('<leader>tld', require('telescope.builtin').lsp_definitions, '[T]elescope [L]SP [D]efinitions')
 	nmap('<leader>tltd', require('telescope.builtin').lsp_type_definitions, '[T]elescope [L]SP [T]ype [D]efinitions')
 	nmap(
-		'<leader>tlws',
+		'<leader>tlsw',
 		require('telescope.builtin').lsp_dynamic_workspace_symbols,
-		'[T]elescope [L]SP [W]orkspace [S]ymbols'
+		'[T]elescope [L]SP [S]ymbols [W]orkspace'
 	)
 
 	require('which-key').register({
@@ -35,13 +37,10 @@ local lsp_mappings = function(bufnr)
 			l = {
 				name = 'LSP',
 				t = { name = 'Type' },
-				w = { name = 'Workspace' },
-				d = { name = 'Document' },
+				s = { name = 'Symbols' },
 			},
 		},
 	}, { prefix = '<leader>', buffer = bufnr, mode = 'n' })
 end
 
-return {
-	lsp_mappings = lsp_mappings,
-}
+return M

@@ -1,5 +1,5 @@
 local on_attach = function(_, bufnr)
-	require('homey.plugins.configs.lsp.mappings').lsp_mappings(bufnr)
+	require('homey.plugins.configs.lsp.mappings').set_lsp_mappings(bufnr)
 	require('lsp_signature').on_attach()
 end
 
