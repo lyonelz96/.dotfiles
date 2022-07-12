@@ -17,5 +17,11 @@ null_ls.setup({
 		null_ls.builtins.formatting.stylua.with({
 			extra_args = { '--quote-style', 'ForceSingle' },
 		}),
+		null_ls.builtins.diagnostics.eslint_d.with({
+			only_local = 'node_modules/.bin',
+		}),
+		null_ls.builtins.formatting.prettierd.with({
+			only_local = 'node_modules/.bin',
+		}),
 	},
 })
