@@ -33,7 +33,7 @@ require('packer').startup(function(use)
 	use('saadparwaiz1/cmp_luasnip')
 	use('L3MON4D3/LuaSnip')
 	use('rafamadriz/friendly-snippets')
-	use('williamboman/nvim-lsp-installer')
+	use({ 'williamboman/mason.nvim' })
 	use('jose-elias-alvarez/null-ls.nvim')
 	use('ray-x/lsp_signature.nvim')
 
