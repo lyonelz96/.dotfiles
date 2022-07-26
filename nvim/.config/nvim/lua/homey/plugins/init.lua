@@ -1,10 +1,9 @@
 require('homey.plugins.configs.packer')
 
 --- LSP ---
-require('homey.plugins.configs.lsp')
+require('homey.plugins.configs.mason')
 require('homey.plugins.configs.cmp')
 require('homey.plugins.configs.null_ls')
-require('homey.plugins.configs.mason')
 
 --- QOL ---
 require('homey.plugins.configs.autopairs')
