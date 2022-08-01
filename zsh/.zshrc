@@ -41,7 +41,5 @@ alias gr='git rebase'
 alias gri='git rebase -i'
 
 alias bu='brew update && brew upgrade && brew autoremove && brew cleanup'
-alias bs='brew search'
-alias bi='brew info'
 
-alias dot='nvim ~/.dotfiles'
+alias dot='cd ~/.dotfiles && nvim .'
