@@ -5,10 +5,15 @@ M.set_lsp_mappings = function(bufnr)
 		vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
 	end
 
+	local imap = function(keys, func, desc)
+		vim.keymap.set('i', keys, func, { buffer = bufnr, desc = desc })
+	end
+
 	nmap('<leader>lgd', vim.lsp.buf.definition, '[L]SP [G]oto [D]efinition')
 	nmap('<leader>lgi', vim.lsp.buf.implementation, '[L]SP [G]oto [I]mplementation')
 	nmap('<leader>lh', vim.lsp.buf.hover, '[L]SP [H]over')
 	nmap('<leader>lsh', vim.lsp.buf.signature_help, '[L]SP [S]ignature [H]elp')
+	imap('<C-s>', vim.lsp.buf.signature_help, '[L]SP [S]ignature [H]elp')
 	nmap('<leader>lrn', vim.lsp.buf.rename, '[L]SP [R]e[N]ame')
 	nmap('<leader>lca', vim.lsp.buf.code_action, '[L]SP [C]ode [A]ction')
 	nmap('<leader>lf', vim.lsp.buf.formatting, '[L]SP [F]ormat')
