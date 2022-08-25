@@ -37,7 +37,6 @@ require('packer').startup(function(use)
 	use({ 'williamboman/mason.nvim' })
 	use({ 'williamboman/mason-lspconfig.nvim' })
 	use('jose-elias-alvarez/null-ls.nvim')
-	use('ray-x/lsp_signature.nvim')
 
 	--- NAVIGATION ---
 	use('nvim-lua/plenary.nvim')
