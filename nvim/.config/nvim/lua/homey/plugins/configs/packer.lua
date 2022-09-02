@@ -47,6 +47,7 @@ require('packer').startup(function(use)
 
 	--- MISC ---
 	use('kosayoda/nvim-lightbulb')
+	use('antoinemadec/FixCursorHold.nvim')
 	use('windwp/nvim-autopairs')
 	use('folke/which-key.nvim')
 	use('numToStr/Comment.nvim')
