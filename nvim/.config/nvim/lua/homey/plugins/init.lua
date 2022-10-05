@@ -11,6 +11,7 @@ require('homey.plugins.configs.comment')
 require('homey.plugins.configs.lualine')
 require('homey.plugins.configs.barbar')
 require('homey.plugins.configs.treesitter')
+require('homey.plugins.configs.dressing')
 
 --- NAVIGATION ---
 require('homey.plugins.configs.telescope')
