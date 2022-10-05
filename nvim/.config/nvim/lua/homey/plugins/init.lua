@@ -4,7 +4,6 @@ require('homey.plugins.configs.lsp')
 --- QOL ---
 require('homey.plugins.configs.autopairs')
 require('homey.plugins.configs.lightbulb')
-require('homey.plugins.configs.which_key')
 require('homey.plugins.configs.comment')
 
 --- LOOKS ---

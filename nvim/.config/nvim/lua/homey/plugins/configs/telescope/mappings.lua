@@ -11,3 +11,12 @@ vim.keymap.set(
 	require('telescope.builtin').current_buffer_fuzzy_find,
 	{ desc = '[T]elescope [B]uffer [F]uzzy' }
 )
+
+require('which-key').register({
+	t = {
+		name = 'Telescope',
+		b = { name = 'Buffer' },
+		f = { name = 'Find' },
+		g = { name = 'Grep' },
+	},
+}, { prefix = '<leader>', mode = 'n' })

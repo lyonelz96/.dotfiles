@@ -11,3 +11,8 @@ vim.keymap.set('n', '<leader>wl', '<Cmd>wincmd l<CR>')
 vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = '[D]iagnostic Goto [P]rev' })
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = '[D]iagnostic Goto [N]ext' })
 vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[D]iagnostic Open [F]loat' })
+
+require('which-key').register({
+	d = { name = 'Diagnostic' },
+	w = { name = 'Window' },
+}, { prefix = '<leader>', mode = 'n' })

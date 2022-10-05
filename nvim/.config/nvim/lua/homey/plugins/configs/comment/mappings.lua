@@ -16,3 +16,11 @@ vim.keymap.set('v', '<leader>cb', function()
 	vim.api.nvim_feedkeys(key, 'nx', false)
 	require('Comment.api').toggle.linewise(vim.fn.visualmode())
 end, { desc = '[C]omment [B]lock' })
+
+require('which-key').register({
+	c = { name = 'Comment' },
+}, { prefix = '<leader>', mode = 'n' })
+
+require('which-key').register({
+	c = { name = 'Comment' },
+}, { prefix = '<leader>', mode = 'v' })
