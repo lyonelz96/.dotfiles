@@ -8,6 +8,7 @@ require('homey.plugins.configs.which_key')
 require('homey.plugins.configs.comment')
 
 --- LOOKS ---
+require('homey.plugins.configs.kanagawa') -- colorscheme
 require('homey.plugins.configs.lualine')
 require('homey.plugins.configs.barbar')
 require('homey.plugins.configs.treesitter')

@@ -1,7 +1,3 @@
-vim.cmd([[colorscheme kanagawa]])
-
-vim.api.nvim_set_hl(0, 'Normal', { ctermbg = 'none' })
-
 vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 	pattern = { '*' },
 	callback = function()
