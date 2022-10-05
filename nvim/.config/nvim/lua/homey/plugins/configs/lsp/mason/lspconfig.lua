@@ -1,4 +1,3 @@
-require('mason').setup({})
 require('mason-lspconfig').setup({})
 
 local on_attach = function(_, bufnr)
