@@ -1,5 +1,3 @@
-require('homey.plugins.configs.packer')
-
 --- LSP ---
 require('homey.plugins.configs.mason')
 require('homey.plugins.configs.cmp')
