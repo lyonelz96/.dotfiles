@@ -16,3 +16,5 @@ end)
 nvim_tree_events.subscribe('TreeClose', function()
 	bufferline_api.set_offset(0)
 end)
+
+require('homey.plugins.configs.barbar.mappings')

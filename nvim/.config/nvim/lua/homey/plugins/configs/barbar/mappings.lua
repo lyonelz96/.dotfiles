@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<leader>bh', '<Cmd>BufferPrev<CR>')
+vim.keymap.set('n', '<leader>bh', '<Cmd>BufferPrevious<CR>')
 vim.keymap.set('n', '<leader>bl', '<Cmd>BufferNext<CR>')
 vim.keymap.set('n', '<leader>bp', '<Cmd>BufferPick<CR>')
 vim.keymap.set('n', '<leader>bcc', '<Cmd>BufferClose<CR>')
