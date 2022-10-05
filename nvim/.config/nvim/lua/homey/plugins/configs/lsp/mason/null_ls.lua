@@ -9,10 +9,14 @@ require('mason-null-ls').setup_handlers({
 		}))
 	end,
 	prettierd = function()
-		null_ls.register(null_ls.builtins.formatting.prettierd)
+		null_ls.register(null_ls.builtins.formatting.prettierd.with({
+			only_local = 'node_modules/.bin',
+		}))
 	end,
 	eslint_d = function()
-		null_ls.register(null_ls.builtins.diagnostics.eslint_d)
+		null_ls.register(null_ls.builtins.diagnostics.eslint_d.with({
+			only_local = 'node_modules/.bin',
+		}))
 	end,
 })
 
