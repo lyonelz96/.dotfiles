@@ -8,7 +8,6 @@ end
 
 require('packer').startup(function(use)
 	--- LOOKS ---
-	use('eddyekofo94/gruvbox-flat.nvim')
 	use('rebelot/kanagawa.nvim')
 	use('nvim-lualine/lualine.nvim')
 	use('kyazdani42/nvim-web-devicons')
