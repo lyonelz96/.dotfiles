@@ -20,7 +20,7 @@ require('packer').startup(function(use)
 	})
 	use('nvim-treesitter/nvim-treesitter-context')
 	use('stevearc/dressing.nvim')
-	use('romgrk/barbar.nvim')
+    use('akinsho/bufferline.nvim')
 
 	--- LSP ---
 	use('neovim/nvim-lspconfig')
