@@ -57,6 +57,20 @@ cmp.setup({
 	},
 })
 
+cmp.setup.cmdline(':', {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = 'cmdline' },
+	},
+})
+
+cmp.setup.cmdline('/', {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = 'buffer' },
+	},
+})
+
 require('luasnip.loaders.from_vscode').lazy_load()
 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
