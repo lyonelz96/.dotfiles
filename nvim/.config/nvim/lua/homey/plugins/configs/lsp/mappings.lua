@@ -19,7 +19,7 @@ M.set_lsp_mappings = function(bufnr)
 			vim.lsp.buf.format({ bufnr = bufnr, name = choice.name })
 		end
 
-		local clients = vim.lsp.get_active_clients()
+		local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
 		local clients_with_formatting = vim.tbl_filter(function(client)
 			return client['server_capabilities']['documentFormattingProvider']
 		end, clients)
