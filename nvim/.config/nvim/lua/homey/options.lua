@@ -1,10 +1,3 @@
-vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-	pattern = { '*' },
-	callback = function()
-		vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
-	end,
-})
-
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
