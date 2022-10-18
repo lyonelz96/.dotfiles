@@ -4,15 +4,19 @@ vim.keymap.set('n', '<leader>bh', '<Cmd>BufferLineCyclePrev<CR>')
 vim.keymap.set('n', '<leader>bl', '<Cmd>BufferLineCycleNext<CR>')
 vim.keymap.set('n', '<leader>bp', '<Cmd>BufferLinePick<CR>')
 vim.keymap.set('n', '<leader>bcp', '<Cmd>BufferLinePickClose<CR>')
+vim.keymap.set('n', '<leader>btp', '<Cmd>BufferLineTogglePin<CR>')
 
 local bufferline = require('bufferline')
 local bufferline_ui = require('bufferline.ui')
+local bufferline_groups = require('bufferline.groups')
 
 local function close_all()
 	for _, e in ipairs(bufferline.get_elements().elements) do
-		vim.schedule(function()
-			vim.cmd('bd' .. e.id)
-		end)
+		if not (bufferline_groups.is_pinned(e)) then
+			vim.schedule(function()
+				vim.cmd('bd' .. e.id)
+			end)
+		end
 	end
 
 	vim.schedule(function()
