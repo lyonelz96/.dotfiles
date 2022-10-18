@@ -34,8 +34,23 @@ local function close_all_but_current()
 	end)
 end
 
+local function close_current()
+	for _, e in ipairs(bufferline.get_elements().elements) do
+		if e.path == vim.api.nvim_buf_get_name(0) then
+			vim.schedule(function()
+				vim.cmd('bd' .. e.id)
+			end)
+		end
+	end
+
+	vim.schedule(function()
+		bufferline_ui.refresh()
+	end)
+end
+
 vim.keymap.set('n', '<leader>bca', close_all, { desc = '[B]ufferline [C]lose [A]ll' })
 vim.keymap.set('n', '<leader>bco', close_all_but_current, { desc = '[B]ufferline [C]lose [O]ther' })
+vim.keymap.set('n', '<leader>bcc', close_current, { desc = '[B]ufferline [C]lose [C]urrent' })
 
 require('which-key').register({
 	b = {
