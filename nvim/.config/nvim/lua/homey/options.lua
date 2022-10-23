@@ -1,23 +1,33 @@
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.smartindent = true
+local options = {
+	-- indentation
+	tabstop = 4,
+	softtabstop = 4,
+	shiftwidth = 4,
+	expandtab = true,
+	smartindent = true,
 
-vim.opt.swapfile = false
-vim.opt.undofile = true
+	-- meta
+	backup = false,
+	writebackup = true,
+	swapfile = false,
+	undofile = true,
 
-vim.opt.relativenumber = true
-vim.opt.number = true
+	-- visuals
+	relativenumber = true,
+	number = true,
+	signcolumn = 'yes',
+	colorcolumn = '80',
+	cursorline = true,
+	termguicolors = true,
+	showmode = false,
+	scrolloff = 8,
+	wrap = false,
 
-vim.opt.signcolumn = 'yes'
-vim.opt.colorcolumn = '80'
-vim.opt.cursorline = true
-vim.opt.termguicolors = true
-vim.opt.showmode = false
+	-- search
+	hlsearch = false,
+	incsearch = true,
+}
 
-vim.opt.hlsearch = false
-vim.opt.scrolloff = 8
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-vim.opt.mouse = 'a'
-vim.opt.wrap = false
+for name, value in pairs(options) do
+	vim.opt[name] = value
+end

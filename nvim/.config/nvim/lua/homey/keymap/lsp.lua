@@ -1,12 +1,14 @@
 local M = {}
 
-M.set_lsp_mappings = function(bufnr)
+M.set_lsp_keymaps = function(bufnr)
+	local maps = require('homey.keymap')
+
 	local nmap = function(keys, func, desc)
-		vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+		maps.nmap(keys, func, { buffer = bufnr, desc = desc })
 	end
 
 	local imap = function(keys, func, desc)
-		vim.keymap.set('i', keys, func, { buffer = bufnr, desc = desc })
+		maps.imap(keys, func, { buffer = bufnr, desc = desc })
 	end
 
 	local lsp_formatting = function()
@@ -52,34 +54,38 @@ M.set_lsp_mappings = function(bufnr)
 	nmap('<leader>lca', vim.lsp.buf.code_action, '[L]SP [C]ode [A]ction')
 	nmap('<leader>lf', lsp_formatting, '[L]SP [F]ormat')
 
-	nmap('<leader>tlr', require('telescope.builtin').lsp_references, '[T]elescope [L]SP [R]eferences')
-	nmap('<leader>tlsd', require('telescope.builtin').lsp_document_symbols, '[T]elescope [L]SP [S]ymbols [D]ocument ')
-	nmap('<leader>tli', require('telescope.builtin').lsp_implementations, '[T]elescope [L]SP [I]mplementations')
-	nmap('<leader>tld', require('telescope.builtin').lsp_definitions, '[T]elescope [L]SP [D]efinitions')
-	nmap('<leader>tltd', require('telescope.builtin').lsp_type_definitions, '[T]elescope [L]SP [T]ype [D]efinitions')
-	nmap(
-		'<leader>tlsw',
-		require('telescope.builtin').lsp_dynamic_workspace_symbols,
-		'[T]elescope [L]SP [S]ymbols [W]orkspace'
-	)
+	local telescope_builtin_ok, telescope_builtin = pcall(require, 'telescope.builtin')
 
-	require('which-key').register({
-		l = {
-			name = 'LSP',
-			c = { name = 'Code Action' },
-			g = { name = 'Goto' },
-			r = { name = 'Rename' },
-			s = { name = 'Signature' },
-		},
-		t = {
-			name = 'Telescope',
+	if telescope_builtin_ok then
+		nmap('<leader>tlr', telescope_builtin.lsp_references, '[T]elescope [L]SP [R]eferences')
+		nmap('<leader>tlsd', telescope_builtin.lsp_document_symbols, '[T]elescope [L]SP [S]ymbols [D]ocument ')
+		nmap('<leader>tli', telescope_builtin.lsp_implementations, '[T]elescope [L]SP [I]mplementations')
+		nmap('<leader>tld', telescope_builtin.lsp_definitions, '[T]elescope [L]SP [D]efinitions')
+		nmap('<leader>tltd', telescope_builtin.lsp_type_definitions, '[T]elescope [L]SP [T]ype [D]efinitions')
+		nmap('<leader>tlsw', telescope_builtin.lsp_dynamic_workspace_symbols, '[T]elescope [L]SP [S]ymbols [W]orkspace')
+	end
+
+	local wk_ok, wk = pcall(require, 'which-key')
+
+	if wk_ok then
+		wk.register({
 			l = {
 				name = 'LSP',
-				t = { name = 'Type' },
-				s = { name = 'Symbols' },
+				c = { name = 'Code Action' },
+				g = { name = 'Goto' },
+				r = { name = 'Rename' },
+				s = { name = 'Signature' },
 			},
-		},
-	}, { prefix = '<leader>', buffer = bufnr, mode = 'n' })
+			t = {
+				name = 'Telescope',
+				l = {
+					name = 'LSP',
+					t = { name = 'Type' },
+					s = { name = 'Symbols' },
+				},
+			},
+		}, { prefix = '<leader>', buffer = bufnr, mode = 'n' })
+	end
 end
 
 return M
