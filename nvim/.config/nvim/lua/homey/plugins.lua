@@ -63,6 +63,9 @@ if packer_ok then
 		})
 		use('nvim-treesitter/nvim-treesitter-context')
 
+		-- misc
+		use('ThePrimeagen/vim-be-good')
+
 		if PACKER_BOOTSTRAP then
 			require('packer').sync()
 		end
