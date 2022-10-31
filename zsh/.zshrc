@@ -8,7 +8,7 @@ if check_command "nvim" ; then
     export VISUAL="nvim"
 fi
 
-if check_command "nvm" ; then
+if check_dir "/opt/homebrew/opt/nvm" ; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
     [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
