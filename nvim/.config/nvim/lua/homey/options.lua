@@ -11,6 +11,7 @@ local options = {
 	writebackup = true,
 	swapfile = false,
 	undofile = true,
+	updatetime = 50,
 
 	-- visuals
 	relativenumber = true,
