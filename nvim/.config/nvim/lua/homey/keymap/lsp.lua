@@ -23,7 +23,7 @@ M.set_lsp_keymaps = function(bufnr)
 
 		local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
 		local clients_with_formatting = vim.tbl_filter(function(client)
-			return client['server_capabilities']['documentFormattingProvider']
+			return client.supports_method('textDocument/formatting')
 		end, clients)
 
 		table.sort(clients_with_formatting, function(a, b)
