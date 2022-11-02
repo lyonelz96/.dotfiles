@@ -53,10 +53,10 @@ fi
 
 # aliases
 if check_command "exa" ; then
-    alias ls="exa --icons -l"
-    alias la="exa --icons -la"
-    alias lst="exa --icons -l --tree"
-    alias lat="exa --icons -la --tree"
+    alias ls="exa --icons -l --group-directories-first"
+    alias la="exa --icons -la --group-directories-first"
+    alias lst="exa --icons -l --tree --group-directories-first"
+    alias lat="exa --icons -la --tree --group-directories-first"
 fi
 
 if check_command "iterm" ; then
