@@ -35,7 +35,7 @@ M.setup = function()
 
 	if lspconfig_ok and mason_lspconfig_ok then
 		mason_lspconfig.setup({
-			ensure_installed = { 'sumneko_lua', 'tsserver' },
+			ensure_installed = { 'sumneko_lua', 'tsserver', 'gopls' },
 		})
 
 		mason_lspconfig.setup_handlers({ default_handler })
