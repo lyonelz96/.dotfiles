@@ -12,10 +12,11 @@ nmap('<leader>wl', '<Cmd>wincmd l<CR>')
 
 nmap('<leader>dp', vim.diagnostic.goto_prev, { desc = '[D]iagnostic Goto [P]rev' })
 nmap('<leader>dn', vim.diagnostic.goto_next, { desc = '[D]iagnostic Goto [N]ext' })
-nmap('<leader>df', vim.diagnostic.open_float, { desc = '[D]iagnostic Open [F]loat' })
+nmap('<leader>df', function()
+	vim.diagnostic.open_float({ source = true })
+end, { desc = '[D]iagnostic Open [F]loat' })
 
 local wk_ok, wk = pcall(require, 'which-key')
-
 if wk_ok then
 	wk.register({
 		d = { name = 'Diagnostic' },
