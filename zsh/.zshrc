@@ -14,6 +14,10 @@ if check_dir "/opt/homebrew/opt/nvm" ; then
     [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
+if check_command "go" ; then
+   export GOPATH="$HOME/.go"
+fi
+
 # evals
 if check_command "rbenv" ; then
     eval "$(rbenv init - zsh)"
