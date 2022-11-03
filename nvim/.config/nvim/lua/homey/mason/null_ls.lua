@@ -6,7 +6,7 @@ M.setup = function()
 
 	if null_ls_ok and mason_null_ls_ok then
 		mason_null_ls.setup({
-			ensure_installed = { 'stylua', 'prettierd', 'eslint_d' },
+			ensure_installed = { 'stylua' },
 		})
 
 		mason_null_ls.setup_handlers({
@@ -15,17 +15,15 @@ M.setup = function()
 					extra_args = { '--quote-style', 'ForceSingle' },
 				}))
 			end,
-			prettierd = function()
-				null_ls.register(null_ls.builtins.formatting.prettierd.with({
-					only_local = 'node_modules/.bin',
-				}))
-			end,
-			eslint_d = function()
-				null_ls.register(null_ls.builtins.diagnostics.eslint_d.with({
-					only_local = 'node_modules/.bin',
-				}))
-			end,
 		})
+
+		null_ls.register(null_ls.builtins.formatting.prettierd.with({
+			only_local = 'node_modules/.bin',
+		}))
+
+		null_ls.register(null_ls.builtins.diagnostics.eslint_d.with({
+			only_local = 'node_modules/.bin',
+		}))
 
 		null_ls.setup({})
 	end
