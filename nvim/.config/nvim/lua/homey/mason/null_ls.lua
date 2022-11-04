@@ -11,9 +11,7 @@ M.setup = function()
 
 		mason_null_ls.setup_handlers({
 			stylua = function()
-				null_ls.register(null_ls.builtins.formatting.stylua.with({
-					extra_args = { '--quote-style', 'ForceSingle' },
-				}))
+				null_ls.register(null_ls.builtins.formatting.stylua)
 			end,
 		})
 
