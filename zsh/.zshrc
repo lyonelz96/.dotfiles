@@ -59,7 +59,7 @@ if check_command "exa" ; then
     alias lat="exa --icons -la --tree --group-directories-first"
 fi
 
-if check_command "iterm" ; then
+if open -Ra "iterm" ; then
     alias nt="open . -a iterm"
 fi
 
