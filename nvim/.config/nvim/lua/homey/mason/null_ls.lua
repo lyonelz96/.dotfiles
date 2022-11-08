@@ -6,12 +6,23 @@ M.setup = function()
 
     if null_ls_ok and mason_null_ls_ok then
         mason_null_ls.setup({
-            ensure_installed = { 'stylua' },
+            ensure_installed = { 'stylua', 'selene' },
         })
 
         mason_null_ls.setup_handlers({
             stylua = function()
-                null_ls.register(null_ls.builtins.formatting.stylua)
+                null_ls.register(null_ls.builtins.formatting.stylua.with({
+                    condition = function(utils)
+                        utils.root_has_file({ 'stylua.toml', '.stylua.toml' })
+                    end,
+                }))
+            end,
+            selene = function()
+                null_ls.register(null_ls.builtins.diagnostics.selene.with({
+                    condition = function(utils)
+                        utils.root_has_file({ 'selene.toml' })
+                    end,
+                }))
             end,
         })
 
