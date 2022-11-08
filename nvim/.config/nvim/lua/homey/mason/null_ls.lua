@@ -13,7 +13,10 @@ M.setup = function()
             stylua = function()
                 null_ls.register(null_ls.builtins.formatting.stylua.with({
                     condition = function(utils)
-                        return utils.root_has_file({ 'stylua.toml', '.stylua.toml' })
+                        return utils.root_has_file({
+                            'stylua.toml',
+                            '.stylua.toml',
+                        })
                     end,
                 }))
             end,
