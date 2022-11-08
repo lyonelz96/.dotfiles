@@ -4,6 +4,9 @@ return {
             diagnostics = {
                 globals = { 'vim' },
             },
+            workspace = {
+                checkThirdParty = false,
+            },
             format = {
                 enable = true,
                 defaultConfig = {
