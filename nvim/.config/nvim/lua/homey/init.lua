@@ -1,3 +1,4 @@
 require('homey.options')
+require('homey.keymaps')
 require('homey.autocmds')
-require('homey.plugins')
+require('homey.packer')
