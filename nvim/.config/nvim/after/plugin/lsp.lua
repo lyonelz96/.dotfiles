@@ -44,7 +44,7 @@ lsp.on_attach(function(_, bufnr)
     map('n', ']d', vim.diagnostic.goto_next, 'Next Diagnostic')
 end)
 
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
     settings = {
         Lua = {
             diagnostics = {
