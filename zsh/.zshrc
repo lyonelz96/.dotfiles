@@ -38,17 +38,23 @@ bindkey -M menuselect "k" vi-up-line-or-history
 bindkey -M menuselect "l" vi-forward-char
 bindkey -M menuselect "j" vi-down-line-or-history
 
-# sources
-if check_dir "/opt/homebrew/opt/zsh-fast-syntax-highlighting" ; then
-    source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-fi
+# zplug
+if check_dir "/opt/homebrew/opt/zplug" ; then
+    export ZPLUG_HOME=/opt/homebrew/opt/zplug
+    source $ZPLUG_HOME/init.zsh
 
-if check_dir "/opt/homebrew/share/zsh-autosuggestions" ; then
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
+    zplug "zdharma-continuum/fast-syntax-highlighting"
+    zplug "zsh-users/zsh-autosuggestions"
+    zplug "jeffreytse/zsh-vi-mode"
 
-if check_dir "/opt/homebrew/opt/zsh-vi-mode" ; then
-    source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
+    fi
+
+    zplug load
 fi
 
 # aliases
