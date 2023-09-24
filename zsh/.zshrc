@@ -71,7 +71,7 @@ fi
 
 if check_command "git" ; then
     alias gg="git log --oneline --abbrev-commit --all --graph --decorate --color"
-    alias gs="git status"
+    alias gst="git status"
     alias gc="git commit"
     alias ga="git add"
     alias gall="git add ."
@@ -85,6 +85,7 @@ fi
 
 if check_command "brew" ; then
     alias bu="brew update && brew upgrade && brew autoremove && brew cleanup"
+    alias bucask="brew upgrade --cask --greedy"
 fi
 
 if check_command "nvim" ; then
