@@ -1,1 +1,2 @@
-require('homey')
+require("homey.core")
+require("homey.lazy")
