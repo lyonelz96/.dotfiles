@@ -86,6 +86,7 @@ fi
 if check_command "brew" ; then
     alias bu="brew update && brew upgrade && brew autoremove && brew cleanup"
     alias bucask="brew upgrade --cask --greedy"
+    alias buall="bu && bucask"
 fi
 
 if check_command "nvim" ; then
