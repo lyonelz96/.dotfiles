@@ -7,6 +7,8 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<leader>ff", require("conform").format, { desc = "[F]ormat [F]ile" })
+		vim.keymap.set("n", "<leader>ff", function()
+			require("conform").format({ lsp_fallback = true })
+		end, { desc = "[F]ormat [F]ile" })
 	end,
 }
