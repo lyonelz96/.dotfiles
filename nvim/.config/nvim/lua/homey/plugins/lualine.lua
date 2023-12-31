@@ -21,7 +21,7 @@ return {
 
 				return names
 			end
-			return " " .. table.concat(get_lsps_names(), ", ")
+			return "` " .. table.concat(get_lsps_names(), ", ")
 		end
 
 		local get_formatters = function()
@@ -41,7 +41,6 @@ return {
 			end
 			return "󰁨 " .. table.concat(get_formatters_names(), ", ")
 		end
-
 		local get_linters = function()
 			local linters = require("lint").get_running()
 			if #linters == 0 then
@@ -50,16 +49,12 @@ return {
 			return "󱉶 " .. table.concat(linters, ", ")
 		end
 
-		local get_time = function()
-			return tostring(os.date("%I:%M %p")):upper()
-		end
-
 		require("lualine").setup({
 			sections = {
 				lualine_a = { { "mode", fmt = single_char_mode, icon = "󰊠" } },
-				lualine_x = { { get_lsps }, { get_formatters }, { get_linters } },
-				lualine_y = { "filetype" },
-				lualine_z = { { get_time, icon = "" } },
+				lualine_x = {},
+				lualine_y = { { get_lsps }, { get_formatters }, { get_linters }, { "filetype" } },
+				lualine_z = {},
 			},
 		})
 	end,
