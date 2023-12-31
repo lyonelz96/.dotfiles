@@ -52,6 +52,8 @@ return {
 		require("lualine").setup({
 			sections = {
 				lualine_a = { { "mode", fmt = single_char_mode, icon = "󰊠" } },
+				lualine_b = { "filename", "branch", "diff", "diagnostics" },
+				lualine_c = {},
 				lualine_x = {},
 				lualine_y = { { get_lsps }, { get_formatters }, { get_linters }, { "filetype" } },
 				lualine_z = {},
